@@ -12,10 +12,11 @@ app.use(
 );
 app.use(bodyParser.json());
 
-
 // Routes
 const crudRoute = require("./Routes/CRUDRoute");
 const userRoutes = require("./Routes/UserRoutes");
+const { authorizeUser } = require("./Middlewares/Authorization");
+const { authRole } = require("./Middlewares/AuthRole");
 
 mongoose.connect("mongodb://localhost:27017/cssoft", {});
 mongoose.connection.on("connected", () => {
@@ -29,8 +30,33 @@ mongoose.connection.on("error", (err) => {
 app.use("", crudRoute);
 
 // User Route
-app.use("",userRoutes);
+app.use("", userRoutes);
 
+// EJS logic
+app.get("/", (req, res) => {
+  res.render("home");
+});
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+app.get("/register", (req, res) => {
+  res.render("register");
+});
+
+app.get("/admin", (req, res) => {
+  res.render("admin");
+});
+
+app.get("/user", (req, res) => {
+  res.render("user");
+});
+app.get("/navbar", (req, res) => {
+  res.render("navbar");
+});
+app.get("/adminportal", (req, res) => {
+  res.render("adminportal");
+});
+app.set("view engine", "ejs");
 
 // Port
 app.listen(port, () => {

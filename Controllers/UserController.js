@@ -35,6 +35,7 @@ const login = async (req, res) => {
       jwt.sign(
         {
           id: userIf._id,
+          role: userIf.role,
           username: username,
         },
         secret,
@@ -43,7 +44,10 @@ const login = async (req, res) => {
           if (err) {
             return res.status(500).json({ error: "Failed to create token" });
           }
-          return res.json({ token: token, username: username });
+          return res.json({
+            token: token,
+            username: username,
+          });
         }
       );
     } else {
@@ -53,4 +57,13 @@ const login = async (req, res) => {
     res.status(400).json({ error: error });
   }
 };
-module.exports = { register, login };
+
+const profile = async (req, res) => {
+  const userData = req.user;
+  if (userData === "admin") {
+    res.json({ role: "admin" });
+  } else {
+    res.json({ role: "user" });
+  }
+};
+module.exports = { register, login, profile };

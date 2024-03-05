@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+
+<body>
+    <%- include('navbar') %>
+        <h1 style="margin-left: 20px; margin-top: 30px;">Register</h1>
+        <form action="/register" method="POST"
+            style="height: 200px; width: 400px; margin-left: 20px; margin-top: 20px;">
+            <div class="form-outline mb-4">
+                <input type="text" id="username" name="username" placeholder="username" class="form-control" />
+
+            </div>
+            <div class="form-outline mb-4">
+                <input type="password" id="password" name="password" placeholder="password" required
+                    class="form-control" />
+
+            </div>
+            <button type="submit" class="btn btn-primary btn-block mb-4">Register user</button>
+
+        </form>
+        <p style="margin-left: 20px;">Already have an account? <a href=" /login">Login</a></p>
+</body>
+
+</html>
